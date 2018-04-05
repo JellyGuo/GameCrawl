@@ -6,9 +6,7 @@ from GameCrawl.items import GameItem
 class GameSpider(Spider):
     name = "gamecrawler"
     allowed_domains = ["ign.com"]
-    headers={
-        'USER_AGENT': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'
-    }
+
 
     start_urls = [
         "http://www.ign.com/wikis/Metal-Gear-Solid-5-The-Phantom-Pain",
@@ -42,10 +40,11 @@ class GameSpider(Spider):
     def parse(self,response):
         selector = Selector(response)
         item = GameItem()
+        item['guide_url'] = response.url
         item['game_name'] = response.request.url.split('/')[4]
         item['article_head'] = selector.xpath('/html/body/section[2]/section/article/h1/text()').extract_first()
-        item['edit_time'] = selector.xpath(
-            '/html/body/section[2]/section/article/div[2]/span/time/span/text()').extract_first()
+        item['edit_time'] = selector.xpath('/html/body/section[2]/section/article/div[2]/span/time/span/text()').extract_first()
+#
 
         paragraph = selector.xpath('//*[@id="article-content"]/p//text()').extract()
         article = ''
@@ -82,6 +81,7 @@ class GameSpider(Spider):
     def parse_item(self, response):
         selector = Selector(response)
         item = GameItem()
+        item['guide_url'] = response.url
         item['game_name'] = response.request.url.split('/')[4]
         item['article_head'] = selector.xpath('/html/body/section[2]/section/article/h1/text()').extract_first()
         item['edit_time'] = selector.xpath('/html/body/section[2]/section/article/div[2]/span/time/span/text()').extract_first()

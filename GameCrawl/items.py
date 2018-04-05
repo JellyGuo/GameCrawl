@@ -11,9 +11,11 @@ import scrapy
 class GameItem(scrapy.Item):
     # define the fields for your item here like:
     game_name = scrapy.Field()
+    guide_url = scrapy.Field()
     article_head = scrapy.Field()
     edit_time = scrapy.Field()
     article_content = scrapy.Field()
+    like = scrapy.Field()
 
 
     pass

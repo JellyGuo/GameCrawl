@@ -18,6 +18,7 @@ class GamecrawlPipeline(object):
         else:
             with open(fiename, 'a') as f:
                 f.write(item['article_head'] + '\n')
+                f.write(item['guide_url'] + '\n')
                 f.write(item['edit_time'] + '\n')
                 f.write(item['article_content'] + '\n\n')
                 return item
