@@ -41,10 +41,10 @@ class GameSpider(Spider):
         selector = Selector(response)
         item = GameItem()
         item['guide_url'] = response.url
-        item['game_name'] = response.request.url.split('/')[4]
+        item['game_name'] = selector.xpath('/html/body/section[2]/section/div[2]/div/h2/a/text()').extract_first().strip()
         item['article_head'] = selector.xpath('/html/body/section[2]/section/article/h1/text()').extract_first()
         item['edit_time'] = selector.xpath('/html/body/section[2]/section/article/div[2]/span/time/span/text()').extract_first()
-#
+
 
         paragraph = selector.xpath('//*[@id="article-content"]/p//text()').extract()
         article = ''
@@ -82,7 +82,7 @@ class GameSpider(Spider):
         selector = Selector(response)
         item = GameItem()
         item['guide_url'] = response.url
-        item['game_name'] = response.request.url.split('/')[4]
+        item['game_name'] = selector.xpath('/html/body/section[2]/section/div[2]/div/h2/a/text()').extract_first().strip()
         item['article_head'] = selector.xpath('/html/body/section[2]/section/article/h1/text()').extract_first()
         item['edit_time'] = selector.xpath('/html/body/section[2]/section/article/div[2]/span/time/span/text()').extract_first()
 
